@@ -36,7 +36,7 @@ import org.springframework.data.solr.core.query.result.HighlightPage;
  */
 public interface ProductRepository extends SolrCrudRepository<ProductBean, String> {
 
-	List<ProductBean> findByNamedQuery(Integer popularity);
+//	List<ProductBean> findByNamedQuery(Integer popularity);
 
 	@Query(name = "ProductBean.findByNamedQueryUsingAvailable")
 	List<ProductBean> findByAvailableWithSort(boolean available, Sort sort);
@@ -189,11 +189,11 @@ public interface ProductRepository extends SolrCrudRepository<ProductBean, Strin
 
 	Long countByName(String name);
 
-	void deleteByName(String name);
-
-	long deleteProductBeanByName(String name);
-
-	List<ProductBean> removeByName(String name);
+//	void deleteByName(String name);
+//
+//	long deleteProductBeanByName(String name);
+//
+//	List<ProductBean> removeByName(String name);
 
 	@Query(value = "name:?0", delete = true)
 	void removeUsingAnnotatedQuery(String name);

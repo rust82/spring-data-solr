@@ -26,6 +26,7 @@ public class Join {
 
 	private Field from;
 	private Field to;
+	private Field fromIndex;
 
 	private Join() {
 		// hide default constructor
@@ -34,6 +35,12 @@ public class Join {
 	public Join(Field from, Field to) {
 		this.from = from;
 		this.to = to;
+	}
+	
+	public Join(Field from, Field to, Field fromIndex) {
+		this.from = from;
+		this.to = to;
+		this.fromIndex = fromIndex;
 	}
 
 	/**
@@ -64,6 +71,13 @@ public class Join {
 	 */
 	public Field getTo() {
 		return to;
+	}
+	
+	/**
+	* @return null if not set
+	*/
+	public Field getFromIndex() {
+		return fromIndex;
 	}
 
 	public static class Builder {
@@ -98,6 +112,45 @@ public class Join {
 		 */
 		public Join to(String fieldname) {
 			return to(new SimpleField(fieldname));
+		}
+		
+		/**
+		 * @param to
+		 * @return Builder
+		 */
+		public Builder setTo(Field to) {
+			Assert.notNull(to);
+
+			join.to = to;
+			return this;
+		}
+		
+		/**
+		 * @param fieldname
+		 * @return completed {@link Join}
+		 */
+		public Builder setTo(String fieldname) {
+			join.to = new SimpleField(fieldname);
+			return this;
+		}
+		
+		/**
+		* @param fromIndex
+		* @return completed {@link join}
+		*/
+		public Join fromIndex(Field fromIndex) {
+			Assert.notNull(fromIndex);
+		
+			join.fromIndex = fromIndex;
+			return this.join;
+		}
+				
+		/**
+		* @param fromIndexName
+		* @return completed {@link Join}
+		*/
+		public Join fromIndex(String fromIndexName) {
+			return fromIndex(new SimpleField(fromIndexName));
 		}
 
 	}
